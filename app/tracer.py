@@ -86,6 +86,27 @@ def _render_pretty(user_id: str, question: str, trace: list, final_answer: str, 
     return "\n".join(out) + "\n"
 
 
+def write_token_log(model: str, prompt_tokens: int, cached_tokens: int, completion_tokens: int) -> None:
+    """Append one token-usage line to logs/cli/YYYY-MM.log."""
+    now = datetime.now()
+    ts = now.strftime("%Y-%m-%d %H:%M:%S")
+    line = (
+        f"{ts}  model={model}"
+        f"  input={prompt_tokens}"
+        f"  cache={cached_tokens}"
+        f"  output={completion_tokens}"
+        f"  total={prompt_tokens + completion_tokens}\n"
+    )
+    try:
+        cli_dir = LOGS_DIR / "cli"
+        cli_dir.mkdir(parents=True, exist_ok=True)
+        log_file = cli_dir / f"{now.strftime('%Y-%m')}.log"
+        with open(log_file, "a", encoding="utf-8") as f:
+            f.write(line)
+    except Exception as e:
+        log.warning("token log write failed: %s", e)
+
+
 def write_trace(user_id: str, question: str, trace: list, final_answer: str) -> None:
     uid = user_id or "unknown"
     now = datetime.now()

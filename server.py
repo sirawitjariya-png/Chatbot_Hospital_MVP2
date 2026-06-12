@@ -58,6 +58,9 @@ def _handle_line_message(user_id: str, text: str, reply_token: str) -> None:
             "ขออภัย ระบบเกิดข้อผิดพลาดชั่วคราว กรุณาลองใหม่อีกครั้งค่ะ\n"
             "Sorry, a temporary error occurred. Please try again."
         )
+    if reply is None:
+        logger.info("LINE: AI inactive for %s — no reply sent (admin handles manually)", user_id)
+        return
     try:
         requests.post(
             "https://api.line.me/v2/bot/message/reply",
@@ -117,6 +120,9 @@ async def fb_verify(req: Request):
 
 def _send_fb_reply(sender: str, text: str) -> None:
     reply = ask(text)
+    if reply is None:
+        logger.info("FB: AI inactive for %s — no reply sent (admin handles manually)", sender)
+        return
     resp = requests.post(
         "https://graph.facebook.com/v21.0/me/messages",
         params={"access_token": FB_PAGE_TOKEN},
