@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1020" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="ar-navy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1B4577"/>
+    </marker>
+    <marker id="ar-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#2D7A7E"/>
+    </marker>
+    <marker id="ar-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#B0413E"/>
+    </marker>
+    <marker id="ar-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7B8794"/>
+    </marker>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="1280" height="1020" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="#0F2A4A"/>
+
+  <!-- ============ HEADER ============ -->
+  <text x="56" y="58" font-size="26" font-weight="700" fill="#0F2A4A">Agentic RAG Architecture</text>
+  <text x="56" y="84" font-size="13" font-weight="500" fill="#495464">Walailuk Hospital Chatbot · CRAG pattern · OpenAI + ChromaDB + LangGraph · Bilingual Thai + English</text>
+
+  <!-- KPI cards -->
+  <g transform="translate(760, 38)">
+    <rect x="0"   y="0" width="148" height="62" fill="#F4F6F9" stroke="#DAE0E8" rx="3"/>
+    <text x="14"  y="24" font-size="9.5" font-weight="700" fill="#7B8794" letter-spacing="0.8">p95 LATENCY</text>
+    <text x="14"  y="50" font-size="22" font-weight="700" fill="#0F2A4A">2–3 s</text>
+
+    <rect x="156" y="0" width="148" height="62" fill="#F4F6F9" stroke="#DAE0E8" rx="3"/>
+    <text x="170" y="24" font-size="9.5" font-weight="700" fill="#7B8794" letter-spacing="0.8">LLM CALLS / QUERY</text>
+    <text x="170" y="50" font-size="22" font-weight="700" fill="#0F2A4A">3–4</text>
+
+    <rect x="312" y="0" width="148" height="62" fill="#F4F6F9" stroke="#DAE0E8" rx="3"/>
+    <text x="326" y="24" font-size="9.5" font-weight="700" fill="#7B8794" letter-spacing="0.8">vs PREVIOUS</text>
+    <text x="326" y="50" font-size="22" font-weight="700" fill="#2D7A7E">−65% cost</text>
+  </g>
+  <line x1="56" y1="116" x2="1224" y2="116" stroke="#DAE0E8"/>
+
+  <!-- ============ MAIN FLOW (center column, x=280, w=200) ============ -->
+
+  <!-- User pill -->
+  <g>
+    <rect x="180" y="140" width="200" height="36" rx="18" fill="#0F2A4A"/>
+    <text x="280" y="163" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="0.8">USER MESSAGE</text>
+  </g>
+  <line x1="280" y1="176" x2="280" y2="198" stroke="#1B4577" stroke-width="1.5" marker-end="url(#ar-navy)"/>
+
+  <!-- 1 supervisor -->
+  <g>
+    <rect x="180" y="200" width="200" height="80" rx="5" fill="#FFFFFF" stroke="#0F2A4A" stroke-width="2"/>
+    <text x="280" y="225" font-size="10.5" font-weight="700" fill="#7B8794" text-anchor="middle" letter-spacing="0.9">DECISION · 01</text>
+    <text x="280" y="253" font-size="17" font-weight="700" fill="#0F2A4A" text-anchor="middle">supervisor</text>
+    <text x="280" y="270" font-size="10.5" fill="#495464" text-anchor="middle">route the question</text>
+  </g>
+
+  <!-- supervisor → smalltalk branch -->
+  <line x1="380" y1="225" x2="620" y2="225" stroke="#7B8794" stroke-width="1.5" marker-end="url(#ar-grey)"/>
+  <text x="395" y="219" font-size="10.5" font-weight="700" fill="#7B8794">smalltalk</text>
+
+  <!-- supervisor → off_topic branch -->
+  <line x1="380" y1="260" x2="620" y2="260" stroke="#7B8794" stroke-width="1.5" marker-end="url(#ar-grey)"/>
+  <text x="395" y="276" font-size="10.5" font-weight="700" fill="#7B8794">off_topic</text>
+
+  <!-- smalltalk box (right) -->
+  <g>
+    <rect x="620" y="205" width="190" height="40" rx="4" fill="#F4F6F9" stroke="#DAE0E8"/>
+    <text x="715" y="222" font-size="13" font-weight="700" fill="#0F2A4A" text-anchor="middle">smalltalk reply</text>
+    <text x="715" y="237" font-size="10" fill="#495464" text-anchor="middle">brief friendly greeting</text>
+  </g>
+  <line x1="810" y1="225" x2="860" y2="225" stroke="#7B8794" stroke-width="1.5" marker-end="url(#ar-grey)"/>
+  <rect x="860" y="208" width="60" height="34" rx="17" fill="#7B8794"/>
+  <text x="890" y="230" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">END</text>
+
+  <!-- off_topic box (right) -->
+  <g>
+    <rect x="620" y="255" width="190" height="40" rx="4" fill="#F4F6F9" stroke="#DAE0E8"/>
+    <text x="715" y="272" font-size="13" font-weight="700" fill="#0F2A4A" text-anchor="middle">off_topic reply</text>
+    <text x="715" y="287" font-size="10" fill="#495464" text-anchor="middle">scoped-decline message</text>
+  </g>
+  <line x1="810" y1="275" x2="860" y2="275" stroke="#7B8794" stroke-width="1.5" marker-end="url(#ar-grey)"/>
+  <rect x="860" y="258" width="60" height="34" rx="17" fill="#7B8794"/>
+  <text x="890" y="280" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">END</text>
+
+  <!-- supervisor → retrieve (rag) -->
+  <line x1="280" y1="280" x2="280" y2="313" stroke="#1B4577" stroke-width="1.5" marker-end="url(#ar-navy)"/>
+  <text x="295" y="300" font-size="11" font-weight="700" fill="#2D7A7E">rag</text>
+
+  <!-- 2 retrieve -->
+  <g>
+    <rect x="180" y="315" width="200" height="80" rx="5" fill="#1B4577"/>
+    <text x="280" y="340" font-size="10.5" font-weight="700" fill="#A5C0DA" text-anchor="middle" letter-spacing="0.9">ACTION · 02</text>
+    <text x="280" y="368" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">retrieve</text>
+    <text x="280" y="385" font-size="10.5" fill="#D6E0EB" text-anchor="middle">expand · embed · search · rerank</text>
+  </g>
+  <line x1="280" y1="395" x2="280" y2="423" stroke="#1B4577" stroke-width="1.5" marker-end="url(#ar-navy)"/>
+
+  <!-- 3 grade_chunks -->
+  <g>
+    <rect x="180" y="425" width="200" height="80" rx="5" fill="#FFFFFF" stroke="#0F2A4A" stroke-width="2"/>
+    <text x="280" y="450" font-size="10.5" font-weight="700" fill="#7B8794" text-anchor="middle" letter-spacing="0.9">DECISION · 03</text>
+    <text x="280" y="478" font-size="17" font-weight="700" fill="#0F2A4A" text-anchor="middle">grade_chunks</text>
+    <text x="280" y="495" font-size="10.5" fill="#495464" text-anchor="middle">CRAG yes / no — relevant?</text>
+  </g>
+
+  <!-- grade_chunks → draft_answer (relevant, straight down) -->
+  <line x1="280" y1="505" x2="280" y2="553" stroke="#2D7A7E" stroke-width="1.8" marker-end="url(#ar-teal)"/>
+  <text x="295" y="535" font-size="11" font-weight="700" fill="#2D7A7E">✓ relevant</text>
+
+  <!-- grade_chunks → web_search (not relevant, right turn) -->
+  <path d="M 380 465 H 480 V 540 H 510" stroke="#B0413E" stroke-width="1.8" fill="none" marker-end="url(#ar-red)"/>
+  <text x="395" y="460" font-size="11" font-weight="700" fill="#B0413E">✗ not relevant</text>
+
+  <!-- 4 draft_answer (main) -->
+  <g>
+    <rect x="180" y="555" width="200" height="80" rx="5" fill="#C28A2C"/>
+    <text x="280" y="580" font-size="10.5" font-weight="700" fill="#FBEAC1" text-anchor="middle" letter-spacing="0.9">OUTPUT · 04</text>
+    <text x="280" y="608" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">draft_answer</text>
+    <text x="280" y="625" font-size="10.5" fill="#FBEAC1" text-anchor="middle">grounded · bilingual · empathetic</text>
+  </g>
+
+  <!-- 5 web_search (right fallback) -->
+  <g>
+    <rect x="510" y="510" width="180" height="60" rx="5" fill="#1B4577"/>
+    <text x="600" y="532" font-size="10.5" font-weight="700" fill="#A5C0DA" text-anchor="middle" letter-spacing="0.9">ACTION · 05</text>
+    <text x="600" y="556" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">web_search</text>
+  </g>
+  <text x="600" y="586" font-size="10" font-style="italic" fill="#495464" text-anchor="middle">Tavily · hospital-scoped query</text>
+  <line x1="600" y1="595" x2="600" y2="613" stroke="#1B4577" stroke-width="1.5" marker-end="url(#ar-navy)"/>
+
+  <!-- 6 answer_web -->
+  <g>
+    <rect x="510" y="615" width="180" height="60" rx="5" fill="#C28A2C"/>
+    <text x="600" y="637" font-size="10.5" font-weight="700" fill="#FBEAC1" text-anchor="middle" letter-spacing="0.9">OUTPUT · 06</text>
+    <text x="600" y="661" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">answer_web</text>
+  </g>
+
+  <!-- merge edges into reflect -->
+  <line x1="280" y1="635" x2="280" y2="703" stroke="#1B4577" stroke-width="1.5" marker-end="url(#ar-navy)"/>
+  <path d="M 600 675 V 720 H 380" stroke="#1B4577" stroke-width="1.5" fill="none" marker-end="url(#ar-navy)"/>
+
+  <!-- 7 reflect (optional) -->
+  <g>
+    <rect x="180" y="705" width="200" height="80" rx="5" fill="#FFF8E7" stroke="#C28A2C" stroke-width="2" stroke-dasharray="6,4"/>
+    <text x="280" y="730" font-size="10.5" font-weight="700" fill="#94621E" text-anchor="middle" letter-spacing="0.9">GATE · 07 · OPTIONAL</text>
+    <text x="280" y="758" font-size="17" font-weight="700" fill="#7C5217" text-anchor="middle">reflect</text>
+    <text x="280" y="775" font-size="10.5" fill="#94621E" text-anchor="middle">if ENABLE_REFLECTION = true</text>
+  </g>
+
+  <line x1="280" y1="785" x2="280" y2="813" stroke="#1B4577" stroke-width="1.5" marker-end="url(#ar-navy)"/>
+
+  <!-- Final END pill -->
+  <rect x="250" y="815" width="60" height="34" rx="17" fill="#0F2A4A"/>
+  <text x="280" y="837" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">END</text>
+
+  <!-- ============ RIGHT ANNOTATION PANEL ============ -->
+  <g transform="translate(960, 140)">
+    <text x="0" y="0" font-size="11" font-weight="700" fill="#0F2A4A" letter-spacing="1.2">COMPONENT REFERENCE</text>
+    <line x1="0" y1="10" x2="270" y2="10" stroke="#0F2A4A" stroke-width="1.5"/>
+
+    <g transform="translate(0, 28)">
+      <circle cx="11" cy="11" r="11" fill="#0F2A4A"/>
+      <text x="11" y="15" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+      <text x="32" y="15" font-size="12" font-weight="700" fill="#0F2A4A">supervisor</text>
+      <text x="32" y="31" font-size="10.5" fill="#495464">Classify · rag / smalltalk / off_topic.</text>
+      <text x="32" y="44" font-size="10.5" fill="#495464">Uses ROUTER model.</text>
+    </g>
+
+    <g transform="translate(0, 78)">
+      <circle cx="11" cy="11" r="11" fill="#0F2A4A"/>
+      <text x="11" y="15" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+      <text x="32" y="15" font-size="12" font-weight="700" fill="#0F2A4A">retrieve</text>
+      <text x="32" y="31" font-size="10.5" fill="#495464">3-paraphrase expansion (cached) →</text>
+      <text x="32" y="44" font-size="10.5" fill="#495464">embed → ChromaDB hospital-kb (md + url,</text>
+      <text x="32" y="57" font-size="10.5" fill="#495464">metadata-filtered) → Cohere rerank.</text>
+    </g>
+
+    <g transform="translate(0, 142)">
+      <circle cx="11" cy="11" r="11" fill="#0F2A4A"/>
+      <text x="11" y="15" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+      <text x="32" y="15" font-size="12" font-weight="700" fill="#0F2A4A">grade_chunks</text>
+      <text x="32" y="31" font-size="10.5" fill="#495464">Single yes/no LLM judgment. Replaces</text>
+      <text x="32" y="44" font-size="10.5" fill="#495464">per-stage answer-then-evaluate chain.</text>
+    </g>
+
+    <g transform="translate(0, 192)">
+      <circle cx="11" cy="11" r="11" fill="#C28A2C"/>
+      <text x="11" y="15" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+      <text x="32" y="15" font-size="12" font-weight="700" fill="#0F2A4A">draft_answer</text>
+      <text x="32" y="31" font-size="10.5" fill="#495464">User-facing reply, context-grounded,</text>
+      <text x="32" y="44" font-size="10.5" fill="#495464">warm patient tone. ANSWER model.</text>
+    </g>
+
+    <g transform="translate(0, 242)">
+      <circle cx="11" cy="11" r="11" fill="#0F2A4A"/>
+      <text x="11" y="15" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+      <text x="32" y="15" font-size="12" font-weight="700" fill="#0F2A4A">web_search</text>
+      <text x="32" y="31" font-size="10.5" fill="#495464">Tavily fallback prefixed with hospital</text>
+      <text x="32" y="44" font-size="10.5" fill="#495464">name (Thai or English); top 3 snippets.</text>
+    </g>
+
+    <g transform="translate(0, 292)">
+      <circle cx="11" cy="11" r="11" fill="#C28A2C"/>
+      <text x="11" y="15" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">6</text>
+      <text x="32" y="15" font-size="12" font-weight="700" fill="#0F2A4A">answer_web</text>
+      <text x="32" y="31" font-size="10.5" fill="#495464">Same generator as #4, context =</text>
+      <text x="32" y="44" font-size="10.5" fill="#495464">web snippets instead of KB chunks.</text>
+    </g>
+
+    <g transform="translate(0, 342)">
+      <circle cx="11" cy="11" r="11" fill="#FFFFFF" stroke="#C28A2C" stroke-width="2"/>
+      <text x="11" y="15" font-size="11" font-weight="700" fill="#C28A2C" text-anchor="middle">7</text>
+      <text x="32" y="15" font-size="12" font-weight="700" fill="#0F2A4A">reflect (optional)</text>
+      <text x="32" y="31" font-size="10.5" fill="#495464">Critique for reliability, politeness,</text>
+      <text x="32" y="44" font-size="10.5" fill="#495464">logic. Toggle via ENABLE_REFLECTION.</text>
+    </g>
+
+    <!-- MODELS &amp; SERVICES -->
+    <text x="0" y="412" font-size="11" font-weight="700" fill="#0F2A4A" letter-spacing="1.2">MODELS &amp; SERVICES</text>
+    <line x1="0" y1="422" x2="270" y2="422" stroke="#0F2A4A" stroke-width="1.5"/>
+
+    <g font-size="10.5">
+      <text x="0"   y="442" font-weight="600" fill="#495464">Router LLM</text>
+      <text x="270" y="442" font-weight="700" fill="#0F2A4A" text-anchor="end">gpt-4o-mini</text>
+      <line x1="0" y1="450" x2="270" y2="450" stroke="#E2E8F0"/>
+
+      <text x="0"   y="466" font-weight="600" fill="#495464">Answer LLM</text>
+      <text x="270" y="466" font-weight="700" fill="#0F2A4A" text-anchor="end">gpt-4.1</text>
+      <line x1="0" y1="474" x2="270" y2="474" stroke="#E2E8F0"/>
+
+      <text x="0"   y="490" font-weight="600" fill="#495464">Embeddings</text>
+      <text x="270" y="490" font-weight="700" fill="#0F2A4A" text-anchor="end">text-embedding-3-large</text>
+      <line x1="0" y1="498" x2="270" y2="498" stroke="#E2E8F0"/>
+
+      <text x="0"   y="514" font-weight="600" fill="#495464">Vector store</text>
+      <text x="270" y="514" font-weight="700" fill="#0F2A4A" text-anchor="end">ChromaDB · single collection</text>
+      <line x1="0" y1="522" x2="270" y2="522" stroke="#E2E8F0"/>
+
+      <text x="0"   y="538" font-weight="600" fill="#495464">Reranker</text>
+      <text x="270" y="538" font-weight="700" fill="#0F2A4A" text-anchor="end">Cohere rerank-multilingual-v3</text>
+      <line x1="0" y1="546" x2="270" y2="546" stroke="#E2E8F0"/>
+
+      <text x="0"   y="562" font-weight="600" fill="#495464">Web fallback</text>
+      <text x="270" y="562" font-weight="700" fill="#0F2A4A" text-anchor="end">Tavily Search</text>
+      <line x1="0" y1="570" x2="270" y2="570" stroke="#E2E8F0"/>
+
+      <text x="0"   y="586" font-weight="600" fill="#495464">Orchestrator</text>
+      <text x="270" y="586" font-weight="700" fill="#0F2A4A" text-anchor="end">LangGraph 0.2 · CRAG</text>
+      <line x1="0" y1="594" x2="270" y2="594" stroke="#E2E8F0"/>
+
+      <text x="0"   y="610" font-weight="600" fill="#495464">Runtime</text>
+      <text x="270" y="610" font-weight="700" fill="#0F2A4A" text-anchor="end">FastAPI · Cloud Run 1 GiB</text>
+    </g>
+  </g>
+
+  <!-- ============ FOOTER / LEGEND ============ -->
+  <line x1="56" y1="900" x2="1224" y2="900" stroke="#DAE0E8"/>
+  <g transform="translate(56, 932)" font-size="11">
+    <text x="0" y="0" font-weight="700" fill="#0F2A4A" letter-spacing="1">LEGEND</text>
+
+    <rect x="80"  y="-12" width="22" height="14" rx="3" fill="#FFFFFF" stroke="#0F2A4A" stroke-width="2"/>
+    <text x="110" y="0" fill="#495464">Decision</text>
+
+    <rect x="190" y="-12" width="22" height="14" rx="3" fill="#1B4577"/>
+    <text x="220" y="0" fill="#495464">Action</text>
+
+    <rect x="290" y="-12" width="22" height="14" rx="3" fill="#C28A2C"/>
+    <text x="320" y="0" fill="#495464">Output (LLM-generated answer)</text>
+
+    <rect x="540" y="-12" width="22" height="14" rx="3" fill="#FFF8E7" stroke="#C28A2C" stroke-width="2" stroke-dasharray="4,2"/>
+    <text x="570" y="0" fill="#495464">Optional gate</text>
+
+    <rect x="665" y="-14" width="36" height="18" rx="9" fill="#0F2A4A"/>
+    <text x="709" y="0" fill="#495464">Terminal</text>
+
+    <text x="800" y="0" fill="#7B8794" font-style="italic">Edges: navy = main · grey = routing · teal = relevant · red = fallback</text>
+  </g>
+
+  <text x="56" y="978" font-size="10" fill="#7B8794">Walailuk Hospital Chatbot · MVP1 · Author: Sirawit Jariyapongpaiboon</text>
+</svg>

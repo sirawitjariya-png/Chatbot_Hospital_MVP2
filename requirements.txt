@@ -1,0 +1,27 @@
+# --- Core LLM + vector DB ---
+openai>=1.50.0,<2.0
+chromadb>=0.5.0,<0.6
+tiktoken>=0.7.0,<0.9
+
+# --- LangGraph orchestration (pinned to avoid 1.x breakage) ---
+langgraph>=0.2.50,<0.3
+
+# --- Document loaders ---
+pypdf>=4.3.0,<6.0
+python-docx>=1.1.0,<2.0
+requests>=2.32.0,<3.0
+beautifulsoup4>=4.12.0,<5.0
+trafilatura>=1.12.0,<3.0
+
+# --- Web search fallback ---
+tavily-python>=0.3.0,<1.0
+
+# --- Optional reranker (only used when RERANKER=cohere) ---
+cohere>=5.0.0,<6.0
+
+# --- Web framework ---
+fastapi>=0.115.0,<0.120
+uvicorn[standard]>=0.30.0,<0.40
+
+# --- Config ---
+python-dotenv>=1.0.1,<2.0

@@ -1,0 +1,18 @@
+========================================================================
+  2026-05-28 17:03:33   user: test_OFF-TOPIC
+========================================================================
+
+  ┌─ QUESTION
+  │  วันนี้อากาศเป็นอย่างไรบ้าง และขอสูตรทำข้าวผัดหน่อยได้ไหม
+
+  ┌─ ROUTING  →  OFF_TOPIC
+
+  ┌─ OFF-TOPIC  (question not hospital-related)
+
+  ┌─ FINAL ANSWER
+  │  ขออภัยค่ะ คำถามของคุณไม่เกี่ยวข้องกับบริการของโรงพยาบาลวลัยลักษณ์ ระบบนี้ให้บริการเฉพาะข้อมูลด้านการแพทย์และบริการของโรงพยาบาลเท่านั้น หากมีคำถามเกี่ยวกับการรักษา แพทย์ หรือบริการของเรา ยินดีให้บริการเสมอค่ะ 🙏
+  │  
+  │  Sorry, your question is not related to Walailuk Hospital's services. This chatbot is designed to answer questions about our hospital, doctors, and medical services only. Please feel free to ask anything related to our healthcare services.
+
+------------------------------------------------------------------------
+

@@ -1,0 +1,52 @@
+========================================================================
+  2026-06-10 18:35:20   user: test_off
+========================================================================
+
+  ┌─ QUESTION
+  │  who won the football game
+
+  ┌─ CLASSIFY  →  OFF_TOPIC
+
+  ┌─ OFF-TOPIC  (not hospital-related)
+
+  ┌─ FINAL ANSWER
+  │  ขออภัยค่ะ คำถามของคุณไม่เกี่ยวข้องกับบริการของโรงพยาบาลวลัยลักษณ์ ระบบนี้ให้บริการเฉพาะข้อมูลด้านการแพทย์และบริการของโรงพยาบาลเท่านั้น หากมีคำถามเกี่ยวกับการรักษา หรือบริการของเรา ยินดีให้บริการเสมอค่ะ 🙏
+  │  
+  │  Sorry, your question is not related to Walailuk Hospital's services. This chatbot answers questions about our hospital and dental services only.
+
+------------------------------------------------------------------------
+
+========================================================================
+  2026-06-10 18:56:25   user: test_off
+========================================================================
+
+  ┌─ QUESTION
+  │  who won the football game
+
+  ┌─ CLASSIFY  →  OFF_TOPIC
+
+  ┌─ OFF-TOPIC  (not hospital-related)
+
+  ┌─ FINAL ANSWER
+  │  ขออภัยค่ะ คำถามของคุณไม่เกี่ยวข้องกับบริการของโรงพยาบาลวลัยลักษณ์ ระบบนี้ให้บริการเฉพาะข้อมูลด้านทันตกรรมและบริการของโรงพยาบาลเท่านั้น หากมีคำถามเกี่ยวกับการรักษาหรือบริการของเรา ยินดีให้บริการเสมอค่ะ 🙏
+  │  
+  │  Sorry, your question is not related to Walailuk Hospital's services. This chatbot answers questions about our dental and medical services only. Feel free to ask anything about our treatments or hospital.
+
+------------------------------------------------------------------------
+
+========================================================================
+  2026-06-10 19:06:50   user: test_off
+========================================================================
+
+  ┌─ QUESTION
+  │  who won the football game
+
+  ┌─ CLASSIFY  →  OFF_TOPIC
+
+  ┌─ OFF-TOPIC  (not hospital-related)
+
+  ┌─ FINAL ANSWER
+  │  Hmm, that one's a bit outside what I can help with! 😅 I'm set up to answer questions about dental treatments and Walailuk Hospital's services. Got anything along those lines? I'm here for it! 😊
+
+------------------------------------------------------------------------
+
