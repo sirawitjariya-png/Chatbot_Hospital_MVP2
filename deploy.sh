@@ -9,14 +9,11 @@ set -euo pipefail
 GCP_PROJECT="phupha-chatbot"
 GCP_REGION="asia-southeast1"           # change if you prefer another region
 AR_REPO="chatbot-repo"                 # Artifact Registry repo name
-SERVICE_NAME="hospital-chatbot-v3"     # Cloud Run service name
+SERVICE_NAME="hospital-chatbot-v4"     # Cloud Run service name
 IMAGE_TAG="${1:-latest}"
 
 IMAGE="$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$AR_REPO/$SERVICE_NAME:$IMAGE_TAG"
 # ─────────────────────────────────────────────────────────────────────────────
-
-echo "==> Rebuilding vector index (data/chroma/) from data/raw/..."
-python main.py ingest
 
 echo "==> Authenticating Docker with Artifact Registry..."
 gcloud auth configure-docker "$GCP_REGION-docker.pkg.dev" --quiet
@@ -38,7 +35,7 @@ gcloud run deploy "$SERVICE_NAME" \
   --memory 1Gi \
   --cpu 1 \
   --min-instances 1 \
-  --max-instances 3 \
+  --max-instances 1 \
   --concurrency 10 \
   --timeout 120 \
   --port 8000 \

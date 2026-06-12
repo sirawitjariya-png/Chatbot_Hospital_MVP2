@@ -1,5 +1,0 @@
-# One URL per line. Lines starting with '#' are ignored.
-# Examples — uncomment and replace with real hospital pages:
-# https://example-hospital.org/about
-# https://example-hospital.org/services
-# https://example-hospital.org/doctors
