@@ -16,8 +16,8 @@ if not OPENAI_API_KEY:
     )
 
 # Two model knobs: cheap for routing, quality for user-facing answers
-ROUTER_MODEL = os.getenv("ROUTER_MODEL") or os.getenv("LLM_MODEL") or "gpt-4o-mini"
-ANSWER_MODEL = os.getenv("ANSWER_MODEL") or os.getenv("LLM_MODEL") or "gpt-4.1"
+ROUTER_MODEL = os.getenv("ROUTER_MODEL") or os.getenv("LLM_MODEL") or "gpt-5-mini"
+ANSWER_MODEL = os.getenv("ANSWER_MODEL") or os.getenv("LLM_MODEL") or "gpt-5-mini"
 
 OPENAI_TIMEOUT_S = int(os.getenv("OPENAI_TIMEOUT_S", "60"))
 
