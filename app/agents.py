@@ -1,6 +1,13 @@
 """Core LLM helpers + static reply functions.
+"""Core LLM helpers + static reply functions.
 
 Model split:
+  ROUTER_MODEL  — classify_question (cheap routing)
+  ANSWER_MODEL  — format_answer, smalltalk (user-facing quality)
+
+Language detection:
+  _is_thai(text) — True when text contains Thai Unicode characters.
+  Every user-facing function uses this to pick Thai or English copy.
   ROUTER_MODEL  — classify_question (cheap routing)
   ANSWER_MODEL  — format_answer, smalltalk (user-facing quality)
 
@@ -15,6 +22,7 @@ from .config import ROUTER_MODEL, ANSWER_MODEL, OPENAI_TIMEOUT_S
 from .tracer import write_token_log
 
 log = logging.getLogger(__name__)
+_client = OpenAI()
 _client = OpenAI()
 
 
@@ -112,9 +120,12 @@ def smalltalk(question: str, history: list) -> str:
     except Exception as e:
         log.error("smalltalk LLM failed: %s", e)
         return fallback
+        log.error("smalltalk LLM failed: %s", e)
+        return fallback
 
 
 # ---------------------------------------------------------------------------
+# Static replies — language-aware
 # Static replies — language-aware
 # ---------------------------------------------------------------------------
 
@@ -129,6 +140,45 @@ def off_topic(question: str = "") -> str:
         "I'm sorry, that question falls outside the scope of our services. "
         "Walailuk University Dentist Hospital in Bangkok provides information regarding dental treatments and hospital services only. "
         "Please feel free to ask if you have any inquiries in those areas."
+
+def off_topic(question: str = "") -> str:
+    if _is_thai(question):
+        return (
+            "ขออภัยค่ะ คำถามดังกล่าวอยู่นอกขอบเขตการให้บริการของศูนย์ทันตกรรม ม.วลัยลักษณ์ กรุงเทพค่ะ "
+            "ศูนย์ฯ ให้บริการตอบคำถามเฉพาะด้านทันตกรรมและบริการของโรงพยาบาลเท่านั้นค่ะ "
+            "หากมีข้อสงสัยเกี่ยวกับการรักษาหรือบริการของเรา ยินดีให้ความช่วยเหลือค่ะ"
+        )
+    return (
+        "I'm sorry, that question falls outside the scope of our services. "
+        "Walailuk University Dentist Hospital in Bangkok provides information regarding dental treatments and hospital services only. "
+        "Please feel free to ask if you have any inquiries in those areas."
+    )
+
+
+def no_data(question: str = "") -> str:
+    if _is_thai(question):
+        return (
+            "ขออภัยค่ะ ขณะนี้ระบบยังไม่มีข้อมูลในส่วนนี้ค่ะ "
+            "กรุณาติดต่อศูนย์ทันตกรรม ม.วลัยลักษณ์ กรุงเทพ โดยตรง "
+            "เพื่อรับข้อมูลที่ถูกต้องและครบถ้วนจากเจ้าหน้าที่ค่ะ"
+        )
+    return (
+        "We apologize, but the requested information is not currently available in our system. "
+        "Please contact Walailuk University Dentist Hospital in Bangkok directly "
+        "for accurate and comprehensive assistance from our staff."
+    )
+
+
+def fallback_reply(question: str = "") -> str:
+    """Used when the entire graph crashes unexpectedly."""
+    if _is_thai(question):
+        return (
+            "ขออภัยค่ะ ขณะนี้ระบบมีปัญหาชั่วคราว "
+            "กรุณาลองใหม่อีกครั้ง หรือติดต่อศูนย์ทันตกรรม ม.วลัยลักษณ์ กรุงเทพ โดยตรงค่ะ"
+        )
+    return (
+        "We apologize for the inconvenience. A temporary issue has occurred. "
+        "Please try again shortly, or contact Walailuk University Dentist Hospital in Bangkok directly."
     )
 
 
